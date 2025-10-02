@@ -8,13 +8,12 @@ import vehicleImages from "../assets/vehicleImages.js";
 export const Home = () => {
   const navigate = useNavigate();
   const { store, dispatch } = useGlobalReducer();
-  const BASE_URL = "https://www.swapi.tech/api/";
 
   // FETCH THE CHARACTERS
   useEffect(() => {
     async function fetchCharacters() {
       try {
-        const response = await fetch(`${BASE_URL}people`);
+        const response = await fetch("https://www.swapi.tech/api/people/?expanded=true");
         const data = await response.json();
         const characterData = data.results;
         dispatch({ type: "set_characters", payload: characterData });
@@ -29,7 +28,7 @@ export const Home = () => {
   useEffect(() => {
     async function fetchPlanets() {
       try {
-        const response = await fetch(`${BASE_URL}planets`);
+        const response = await fetch("https://www.swapi.tech/api/planets/?expanded=true");
         const data = await response.json();
         const planetsData = data.results;
         dispatch({ type: "set_planets", payload: planetsData });
@@ -44,7 +43,7 @@ export const Home = () => {
   useEffect(() => {
     async function fetchVehicles() {
       try {
-        const response = await fetch(`${BASE_URL}vehicles`);
+        const response = await fetch("https://www.swapi.tech/api/vehicles/?expanded=true");
         const data = await response.json();
         const vehiclesData = data.results;
         dispatch({ type: "set_vehicles", payload: vehiclesData });
@@ -64,16 +63,36 @@ export const Home = () => {
           <article
             className="card me-3 flex-shrink-0"
             style={{ width: "18rem" }}
-            key={`${character.uid} ${character.name}`}>
+            key={`${character.uid} ${character.properties.name}`}>
             <div className="ratio ratio-4x3">
-              <img src={characterImages[character.name] || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" style={{objectPosition: "top"}} alt={character.name || ""} />
+              <img src={characterImages[character.properties.name] || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" style={{ objectPosition: "top" }} alt={character.properties.name || ""} />
             </div>
             <div className="card-body">
-              <h5 className="card-title">{character.name || ""}</h5>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+              <h5 className="card-title">{character.properties.name || ""}</h5>
+              <ul>
+                <li>{character.properties.gender === "n/a" ? "Droid" : character.properties.gender.charAt(0).toUpperCase() + character.properties.gender.slice(1)}</li>
+                <li>{character.properties.height}</li>
+              </ul>
               <div className="d-flex justify-content-between">
-                <button className="btn btn-primary" onClick={(e) => { navigate(`/character/${character.uid}`); }}>Learn more!</button>
-                <a href="#" className="btn btn-warning"><i className="fa-regular fa-heart"></i></a>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={(e) => {
+                    navigate(`/character/${character.uid}`);
+                  }}>
+                  Learn more!
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-warning"
+                  onClick={(e) => {
+                    dispatch({
+                      type: "set_favorites",
+                      payload: action.payload
+                    })
+                  }}>
+                  <i className="fa-regular fa-heart"></i>
+                </button>
               </div>
             </div>
           </article>
@@ -85,16 +104,37 @@ export const Home = () => {
           <article
             className="card me-3 flex-shrink-0"
             style={{ width: "18rem" }}
-            key={`${planet.uid} ${planet.name}`}>
+            key={`${planet.uid} ${planet.properties.name}`}>
             <div className="ratio ratio-4x3">
-              <img src={planetImages[planet.name] || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" alt={planet.name || ""} />
+              <img src={planetImages[planet.properties.name] || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" alt={planet.properties.name || ""} />
             </div>
             <div className="card-body">
-              <h5 className="card-title">{planet.name || ""}</h5>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+              <h5 className="card-title">{planet.properties.name || ""}</h5>
+              <ul>
+                <li>{planet.properties.terrain.charAt(0).toUpperCase() + planet.properties.terrain.slice(1)}</li>
+                <li>Population: {planet.properties.population}</li>
+              </ul>
               <div className="d-flex justify-content-between">
-                <button className="btn btn-primary" onClick={(e) => { navigate(`/planet/${planet.uid}`); }}>Learn more!</button>
-                <a href="#" className="btn btn-warning"><i className="fa-regular fa-heart"></i></a>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={
+                    (e) => {
+                      navigate(`/planet/${planet.uid}`);
+                    }}>
+                  Learn more!
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-warning"
+                  onClick={(e) => {
+                    dispatch({
+                      type: "set_favorites",
+                      payload: action.payload
+                    })
+                  }} >
+                  <i className="fa-regular fa-heart"></i>
+                </button>
               </div>
             </div>
           </article>
@@ -107,16 +147,38 @@ export const Home = () => {
           <article
             className="card me-3 flex-shrink-0"
             style={{ width: "18rem" }}
-            key={`${vehicle.uid} ${vehicle.name}`}>
+            key={`${vehicle.uid} ${vehicle.properties.name}`}>
             <div className="ratio ratio-4x3">
-              <img src={vehicleImages[vehicle.name] || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" style={{objectPosition: "top"}} alt={vehicle.name || ""} />
+              <img src={vehicleImages[vehicle.properties.name] || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" style={{ objectPosition: "top" }} alt={vehicle.properties.name || ""} />
             </div>
             <div className="card-body">
-              <h5 className="card-title">{vehicle.name || ""}</h5>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+              <h5 className="card-title">{vehicle.properties.name || ""}</h5>
+              <ul>
+                <li>Model: {vehicle.properties.model}</li>
+                <li>Max Passengers: {vehicle.properties.passengers}</li>
+              </ul>
               <div className="d-flex justify-content-between">
-                <button className="btn btn-primary" onClick={(e) => { navigate(`/vehicle/${vehicle.uid}`); }}>Learn more!</button>
-                <a href="#" className="btn btn-warning"><i className="fa-regular fa-heart"></i></a>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={
+                    (e) => {
+                      navigate(`/vehicle/${vehicle.uid}`);
+                    }}>
+                  Learn more!
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-warning"
+                  onClick={
+                    (e) => {
+                      dispatch({
+                        type: "set_favorites",
+                        payload: action.payload
+                      })
+                    }}>
+                  <i className="fa-regular fa-heart"></i>
+                </button>
               </div>
             </div>
           </article>
