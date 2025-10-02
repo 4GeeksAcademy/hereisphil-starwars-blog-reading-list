@@ -65,12 +65,14 @@ export const Home = () => {
             className="card me-3 flex-shrink-0"
             style={{ width: "18rem" }}
             key={`${character.uid} ${character.name}`}>
-            <img src={characterImages[character.name]} className="card-img-top" alt={character.name} />
+            <div className="ratio ratio-4x3">
+              <img src={characterImages[character.name] || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" style={{objectPosition: "top"}} alt={character.name || ""} />
+            </div>
             <div className="card-body">
-              <h5 className="card-title">{character.name}</h5>
+              <h5 className="card-title">{character.name || ""}</h5>
               <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
               <div className="d-flex justify-content-between">
-                <button className="btn btn-primary" onClick={(e) => {navigate(`/character/${character.uid}`);}}>Learn more!</button>
+                <button className="btn btn-primary" onClick={(e) => { navigate(`/character/${character.uid}`); }}>Learn more!</button>
                 <a href="#" className="btn btn-warning"><i className="fa-regular fa-heart"></i></a>
               </div>
             </div>
@@ -84,12 +86,14 @@ export const Home = () => {
             className="card me-3 flex-shrink-0"
             style={{ width: "18rem" }}
             key={`${planet.uid} ${planet.name}`}>
-            <img src={planetImages[planet.name]} className="card-img-top" alt={planet.name} />
+            <div className="ratio ratio-4x3">
+              <img src={planetImages[planet.name] || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" alt={planet.name || ""} />
+            </div>
             <div className="card-body">
-              <h5 className="card-title">{planet.name}</h5>
+              <h5 className="card-title">{planet.name || ""}</h5>
               <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
               <div className="d-flex justify-content-between">
-                <button className="btn btn-primary" onClick={(e) => {navigate(`/planet/${planet.uid}`);}}>Learn more!</button>
+                <button className="btn btn-primary" onClick={(e) => { navigate(`/planet/${planet.uid}`); }}>Learn more!</button>
                 <a href="#" className="btn btn-warning"><i className="fa-regular fa-heart"></i></a>
               </div>
             </div>
@@ -104,12 +108,14 @@ export const Home = () => {
             className="card me-3 flex-shrink-0"
             style={{ width: "18rem" }}
             key={`${vehicle.uid} ${vehicle.name}`}>
-            <img src={vehicleImages[vehicle.name]} className="card-img-top" alt={vehicle.name} />
+            <div className="ratio ratio-4x3">
+              <img src={vehicleImages[vehicle.name] || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" style={{objectPosition: "top"}} alt={vehicle.name || ""} />
+            </div>
             <div className="card-body">
-              <h5 className="card-title">{vehicle.name}</h5>
+              <h5 className="card-title">{vehicle.name || ""}</h5>
               <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
               <div className="d-flex justify-content-between">
-                <button className="btn btn-primary" onClick={(e) => {navigate(`/vehicle/${vehicle.uid}`);}}>Learn more!</button>
+                <button className="btn btn-primary" onClick={(e) => { navigate(`/vehicle/${vehicle.uid}`); }}>Learn more!</button>
                 <a href="#" className="btn btn-warning"><i className="fa-regular fa-heart"></i></a>
               </div>
             </div>

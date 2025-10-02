@@ -8,10 +8,11 @@ import { Home } from "./pages/Home";
 import { Character } from "./pages/Character";
 import { Vehicle } from "./pages/Vehicle";
 import { Planet } from "./pages/Planet";
+import NotFound from "./pages/NotFound";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>} >
+      <Route path="/" element={<Layout />} errorElement={<NotFound />} >
         <Route path= "/" element={<Home />} />
         <Route path= "/character/:characterId" element={<Character />} />
         <Route path= "/vehicle/:vehicleId" element={<Vehicle />} />
