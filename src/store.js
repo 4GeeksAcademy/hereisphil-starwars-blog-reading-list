@@ -1,6 +1,7 @@
 export const initialStore = () => {
   return {
     characters: [],
+    characterDetails: {},
     vehicles: [],
     planets: [],
     favorites: [],
@@ -12,6 +13,11 @@ export default function storeReducer(store, action = {}) {
     case "set_characters":
       return {...store,
         characters: action.payload
+      };
+      case 'set_character_details':
+      return {
+        ...store,
+        characterDetails: { ...store.characterDetails, ...action.payload }
       };
       case "set_planets":
       return {...store,

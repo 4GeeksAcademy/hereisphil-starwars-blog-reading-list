@@ -1,5 +1,5 @@
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import characterImages from "../assets/characterImages.js";
 import planetImages from "../assets/planetImages.js";
 import vehicleImages from "../assets/vehicleImages.js";
@@ -7,6 +7,8 @@ import vehicleImages from "../assets/vehicleImages.js";
 export const Home = () => {
   const { store, dispatch } = useGlobalReducer();
   const BASE_URL = "https://www.swapi.tech/api/";
+  const CHARACTER_DETAILS_URL = "https://www.swapi.tech/api/people/";
+  const [characterDetails, setCharacterDetails] = useState({});
 
   // FETCH THE CHARACTERS
   useEffect(() => {
@@ -56,12 +58,13 @@ export const Home = () => {
   return (
     <main className="py-2 px-4">
       {/* CHARACTERS */}
+      <h2 className="text-danger">Characters</h2>
       <div className="d-flex flex-nowrap overflow-auto py-2">
         {store.characters.map((character) =>
-          <article 
-          className="card me-3 flex-shrink-0" 
-          style={{ width: "18rem" }} 
-          key={`${character.uid} ${character.name}`}>
+          <article
+            className="card me-3 flex-shrink-0"
+            style={{ width: "18rem" }}
+            key={`${character.uid} ${character.name}`}>
             <img src={characterImages[character.name]} className="card-img-top" alt={character.name} />
             <div className="card-body">
               <h5 className="card-title">{character.name}</h5>
@@ -74,13 +77,13 @@ export const Home = () => {
           </article>
         )}
       </div>
-      {/* PLANETS */}
+      {/* PLANETS */}<h2 className="text-danger">Planets</h2>
       <div className="d-flex flex-nowrap overflow-auto py-2">
         {store.planets.map((planet) =>
-          <article 
-          className="card me-3 flex-shrink-0" 
-          style={{ width: "18rem" }} 
-          key={`${planet.uid} ${planet.name}`}>
+          <article
+            className="card me-3 flex-shrink-0"
+            style={{ width: "18rem" }}
+            key={`${planet.uid} ${planet.name}`}>
             <img src={planetImages[planet.name]} className="card-img-top" alt={planet.name} />
             <div className="card-body">
               <h5 className="card-title">{planet.name}</h5>
@@ -94,12 +97,13 @@ export const Home = () => {
         )}
       </div>
       {/* VEHICLES */}
+      <h2 className="text-danger">Vehicles</h2>
       <div className="d-flex flex-nowrap overflow-auto py-2">
         {store.vehicles.map((vehicle) =>
-          <article 
-          className="card me-3 flex-shrink-0" 
-          style={{ width: "18rem" }} 
-          key={`${vehicle.uid} ${vehicle.name}`}>
+          <article
+            className="card me-3 flex-shrink-0"
+            style={{ width: "18rem" }}
+            key={`${vehicle.uid} ${vehicle.name}`}>
             <img src={vehicleImages[vehicle.name]} className="card-img-top" alt={vehicle.name} />
             <div className="card-body">
               <h5 className="card-title">{vehicle.name}</h5>
