@@ -3,10 +3,11 @@ import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { useEffect, useState } from "react";
 import characterImages from "../assets/characterImages.js";
 
-export function Characters() {
+export function Character() {
     const { store, dispatch } = useGlobalReducer();
     const navigate = useNavigate();
     const { characterId } = useParams();
+    console.log("This is the characterId:", characterId)
     const [characterDetails, setCharacterDetails] = useState({})
     const characterName = "luke-skywalker";
     const BASE_URL = "https://www.swapi.tech/api/people/";

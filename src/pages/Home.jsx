@@ -1,14 +1,14 @@
+import { useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import characterImages from "../assets/characterImages.js";
 import planetImages from "../assets/planetImages.js";
 import vehicleImages from "../assets/vehicleImages.js";
 
 export const Home = () => {
+  const navigate = useNavigate();
   const { store, dispatch } = useGlobalReducer();
   const BASE_URL = "https://www.swapi.tech/api/";
-  const CHARACTER_DETAILS_URL = "https://www.swapi.tech/api/people/";
-  const [characterDetails, setCharacterDetails] = useState({});
 
   // FETCH THE CHARACTERS
   useEffect(() => {
@@ -70,7 +70,7 @@ export const Home = () => {
               <h5 className="card-title">{character.name}</h5>
               <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
               <div className="d-flex justify-content-between">
-                <a href="#" className="btn btn-primary">Learn more!</a>
+                <button className="btn btn-primary" onClick={(e) => {navigate(`/character/${character.uid}`);}}>Learn more!</button>
                 <a href="#" className="btn btn-warning"><i className="fa-regular fa-heart"></i></a>
               </div>
             </div>
@@ -89,7 +89,7 @@ export const Home = () => {
               <h5 className="card-title">{planet.name}</h5>
               <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
               <div className="d-flex justify-content-between">
-                <a href="#" className="btn btn-primary">Learn more!</a>
+                <button className="btn btn-primary" onClick={(e) => {navigate(`/planet/${planet.uid}`);}}>Learn more!</button>
                 <a href="#" className="btn btn-warning"><i className="fa-regular fa-heart"></i></a>
               </div>
             </div>
@@ -109,7 +109,7 @@ export const Home = () => {
               <h5 className="card-title">{vehicle.name}</h5>
               <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
               <div className="d-flex justify-content-between">
-                <a href="#" className="btn btn-primary">Learn more!</a>
+                <button className="btn btn-primary" onClick={(e) => {navigate(`/vehicle/${vehicle.uid}`);}}>Learn more!</button>
                 <a href="#" className="btn btn-warning"><i className="fa-regular fa-heart"></i></a>
               </div>
             </div>
