@@ -28,7 +28,13 @@ export function Characters() {
     },[])
 
     return (
-        <h1>Hello World</h1>
+        <main>
+            <img src={characterImages[characterDetails.name]} alt={characterDetails.name} />
+            <h2>{characterDetails.name}</h2>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur corporis, repudiandae necessitatibus voluptatibus recusandae possimus doloribus at beatae tempora commodi quos deserunt vel voluptas excepturi doloremque saepe molestias accusamus incidunt!</p>
+            <hr />
+            
+        </main>
     )
 }
 
