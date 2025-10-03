@@ -1,9 +1,6 @@
 import { useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { useNavigate } from "react-router-dom";
-import characterImages from "../assets/characterImages.js";
-import planetImages from "../assets/planetImages.js";
-import vehicleImages from "../assets/vehicleImages.js";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -65,7 +62,7 @@ export const Home = () => {
             style={{ width: "18rem" }}
             key={`${character.uid} ${character.properties.name}`}>
             <div className="ratio ratio-4x3">
-              <img src={characterImages[character.properties.name] || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" style={{ objectPosition: "top" }} alt={character.properties.name || ""} />
+              <img src={`/images/people/${character.uid}.jpg`} className="card-img-top object-fit-cover" style={{ objectPosition: "top" }} alt={character.properties.name || ""} />
             </div>
             <div className="card-body">
               <h5 className="card-title">{character.properties.name || ""}</h5>
@@ -87,8 +84,12 @@ export const Home = () => {
                   className="btn btn-warning"
                   onClick={(e) => {
                     dispatch({
-                      type: "set_favorites",
-                      payload: action.payload
+                      type: "toggle_favorite",
+                      payload: {
+                        id: character.uid,
+                        name: character.properties.name,
+                        nature: "character"
+                      }
                     })
                   }}>
                   <i className="fa-regular fa-heart"></i>
@@ -106,7 +107,7 @@ export const Home = () => {
             style={{ width: "18rem" }}
             key={`${planet.uid} ${planet.properties.name}`}>
             <div className="ratio ratio-4x3">
-              <img src={planetImages[planet.properties.name] || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" alt={planet.properties.name || ""} />
+              <img src={`/images/planets/${planet.uid}.jpg` || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" alt={planet.properties.name || ""} />
             </div>
             <div className="card-body">
               <h5 className="card-title">{planet.properties.name || ""}</h5>
@@ -149,7 +150,7 @@ export const Home = () => {
             style={{ width: "18rem" }}
             key={`${vehicle.uid} ${vehicle.properties.name}`}>
             <div className="ratio ratio-4x3">
-              <img src={vehicleImages[vehicle.properties.name] || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" style={{ objectPosition: "top" }} alt={vehicle.properties.name || ""} />
+              <img src={`/images/vehicles/${vehicle.uid}.jpg` || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" style={{ objectPosition: "top" }} alt={vehicle.properties.name || ""} />
             </div>
             <div className="card-body">
               <h5 className="card-title">{vehicle.properties.name || ""}</h5>

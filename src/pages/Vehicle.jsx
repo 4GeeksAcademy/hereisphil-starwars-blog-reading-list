@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import vehiclesImages from "../assets/vehicleImages.js";
 
 export const Vehicle = () => {
     const { vehicleId } = useParams();
@@ -29,7 +28,7 @@ export const Vehicle = () => {
             <section className="row p-5">
                 <div className="col ratio ratio-1x1">
                     <img
-                        src={vehiclesImages[vehicleDetails.name] || "https://placehold.co/150x150"}
+                        src={`/images/vehicles/${vehicleId}.jpg` || "https://placehold.co/150x150"}
                         className="object-fit-fill"
                         alt={vehicleDetails.name || ""}
                     />
