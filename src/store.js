@@ -26,7 +26,7 @@ export default function storeReducer(store, action = {}) {
       };
     case "toggle_favorite":
       const favoriteItem = store.favorites.find(
-        (favorite) => favorite.id == action.payload.id && favorite.nature === action.payload.nature
+        (favorite) => favorite.id == action.payload.id && favorite.name === action.payload.name
       );
       if (!favoriteItem) {
         return {
@@ -38,7 +38,7 @@ export default function storeReducer(store, action = {}) {
         return {
           ...store,
           favorites: store.favorites.filter(
-            (favorite) => favorite.id !== action.payload.id || favorite.nature !== action.payload.nature
+            (favorite) => favorite.id !== action.payload.id || favorite.name !== action.payload.name
           )
         };
       }

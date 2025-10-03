@@ -62,10 +62,10 @@ export const Home = () => {
             style={{ width: "18rem" }}
             key={`${character.uid} ${character.properties.name}`}>
             <div className="ratio ratio-4x3">
-              <img src={`/images/people/${character.uid}.jpg`} className="card-img-top object-fit-cover" style={{ objectPosition: "top" }} alt={character.properties.name || ""} />
+              <img src={`/images/people/${character.uid}.jpg` || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" style={{ objectPosition: "top" }} alt={character.properties.name || ""} />
             </div>
             <div className="card-body">
-              <h5 className="card-title">{character.properties.name || ""}</h5>
+              <h5 className="card-title">{character.properties.name || "Loading..."}</h5>
               <ul>
                 <li>{character.properties.gender === "n/a" ? "Droid" : character.properties.gender.charAt(0).toUpperCase() + character.properties.gender.slice(1)}</li>
                 <li>{character.properties.height}</li>
@@ -92,7 +92,7 @@ export const Home = () => {
                       }
                     })
                   }}>
-                  <i className="fa-regular fa-heart"></i>
+                  {store.favorites.find((favorite) => favorite.id === character.uid && favorite.name === character.properties.name) ? <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart"></i>}
                 </button>
               </div>
             </div>
@@ -110,7 +110,7 @@ export const Home = () => {
               <img src={`/images/planets/${planet.uid}.jpg` || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" alt={planet.properties.name || ""} />
             </div>
             <div className="card-body">
-              <h5 className="card-title">{planet.properties.name || ""}</h5>
+              <h5 className="card-title">{planet.properties.name || "Loading..."}</h5>
               <ul>
                 <li>{planet.properties.terrain.charAt(0).toUpperCase() + planet.properties.terrain.slice(1)}</li>
                 <li>Population: {planet.properties.population}</li>
@@ -130,11 +130,15 @@ export const Home = () => {
                   className="btn btn-warning"
                   onClick={(e) => {
                     dispatch({
-                      type: "set_favorites",
-                      payload: action.payload
+                      type: "toggle_favorite",
+                      payload: {
+                        id: planet.uid,
+                        name: planet.properties.name,
+                        nature: "planet"
+                      }
                     })
-                  }} >
-                  <i className="fa-regular fa-heart"></i>
+                  }}>
+                  {store.favorites.find((favorite) => favorite.id === planet.uid && favorite.name === planet.properties.name) ? <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart"></i>}
                 </button>
               </div>
             </div>
@@ -153,7 +157,7 @@ export const Home = () => {
               <img src={`/images/vehicles/${vehicle.uid}.jpg` || "https://placehold.co/150x150"} className="card-img-top object-fit-cover" style={{ objectPosition: "top" }} alt={vehicle.properties.name || ""} />
             </div>
             <div className="card-body">
-              <h5 className="card-title">{vehicle.properties.name || ""}</h5>
+              <h5 className="card-title">{vehicle.properties.name || "Loading..."}</h5>
               <ul>
                 <li>Model: {vehicle.properties.model}</li>
                 <li>Max Passengers: {vehicle.properties.passengers}</li>
@@ -171,14 +175,17 @@ export const Home = () => {
                 <button
                   type="button"
                   className="btn btn-warning"
-                  onClick={
-                    (e) => {
-                      dispatch({
-                        type: "set_favorites",
-                        payload: action.payload
-                      })
-                    }}>
-                  <i className="fa-regular fa-heart"></i>
+                  onClick={(e) => {
+                    dispatch({
+                      type: "toggle_favorite",
+                      payload: {
+                        id: vehicle.uid,
+                        name: vehicle.properties.name,
+                        nature: "vehicle"
+                      }
+                    })
+                  }}>
+                  {store.favorites.find((favorite) => favorite.id === vehicle.uid && favorite.name === vehicle.properties.name) ? <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart"></i>}
                 </button>
               </div>
             </div>

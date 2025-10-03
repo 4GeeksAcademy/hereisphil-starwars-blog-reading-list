@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
 export const Navbar = () => {
 	const { store, dispatch } = useGlobalReducer();
+	const navigate = useNavigate();
 
 	return (
 		<nav className="navbar navbar-light bg-light">
@@ -21,16 +22,17 @@ export const Navbar = () => {
 									key={favorite.name}
 									className="dropdown-item px-2 d-flex justify-content-between">
 									{favorite.name}
-									<span onClick={(e) => {
-										dispatch({
-											type: "toggle_favorite",
-											payload: {
-												id: character.uid,
-												name: character.properties.name,
-												nature: "character"
-											}
-										})
-									}}><i className="fa-solid fa-trash-can"></i></span>
+									<span
+										onClick={(e) => {
+											dispatch({
+												type: "toggle_favorite",
+												payload: {
+													id: favorite.id,
+													name: favorite.name,
+												}
+											})
+										}}>
+										<i className="fa-solid fa-trash-can"></i></span>
 								</li>
 							)}
 						</ul>

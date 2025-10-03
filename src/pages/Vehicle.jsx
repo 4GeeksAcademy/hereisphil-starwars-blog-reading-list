@@ -8,7 +8,6 @@ export const Vehicle = () => {
 
     const [vehicleDetails, setVehicleDetails] = useState({})
 
-    // FETCH PLANET BY ID
     useEffect(() => {
         async function fetchVehicle() {
             try {
@@ -26,19 +25,20 @@ export const Vehicle = () => {
     return (
         <main>
             <section className="row p-5">
-                <div className="col ratio ratio-1x1">
+                <div className="col-md-4 d-flex justify-content-center">
                     <img
                         src={`/images/vehicles/${vehicleId}.jpg` || "https://placehold.co/150x150"}
-                        className="object-fit-fill"
+                        className="img-fluid rounded"
+                        style={{ maxWidth: "400px", objectFit: "cover", objectPosition: "top" }}
                         alt={vehicleDetails.name || ""}
                     />
                 </div>
-                <div className="col d-flex flex-column justify-content-center">
-                    <h2 className="text-primary text-center">{vehicleDetails.name}</h2>
+                <div className="col-md-8 d-flex flex-column justify-content-center">
+                    <h2 className="text-primary text-center">{vehicleDetails.name || "Loading..."}</h2>
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci, eum illo commodi eligendi quasi quod neque iusto pariatur perspiciatis sint? Quis repudiandae quos quo reiciendis dignissimos, ea eos totam laboriosam.</p>
                 </div>
             </section>
-            <hr style={{maxWidth: "80%", borderColor: "red", margin: "1rem auto", borderWidth:"4px"}} />
+            <hr style={{ maxWidth: "80%", borderColor: "red", margin: "1rem auto", borderWidth: "4px" }} />
             <section className="d-flex justify-content-around text-danger mb-5">
                 <div>
                     <p className="fw-bold">Model:</p>
@@ -54,7 +54,7 @@ export const Vehicle = () => {
                 </div>
                 <div>
                     <p className="fw-bold">Vehicle Class:</p>
-                    <p className="text-center">{vehicleDetails.vehicle_class ? vehicleDetails.vehicle_class.charAt(0).toUpperCase() + vehicleDetails.vehicle_class.slice(1): ""}</p>
+                    <p className="text-center">{vehicleDetails.vehicle_class ? vehicleDetails.vehicle_class.charAt(0).toUpperCase() + vehicleDetails.vehicle_class.slice(1) : ""}</p>
                 </div>
                 <div>
                     <p className="fw-bold">Cargo Capacity:</p>

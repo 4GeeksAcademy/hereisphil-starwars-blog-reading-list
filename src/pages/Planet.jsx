@@ -9,7 +9,6 @@ export const Planet = () => {
 
     const [planetDetails, setPlanetDetails] = useState({})
 
-    // FETCH PLANET BY ID
     useEffect(() => {
         async function fetchPlanet() {
             try {
@@ -27,23 +26,24 @@ export const Planet = () => {
     return (
         <main>
             <section className="row p-5">
-                <div className="col ratio ratio-1x1">
+                <div className="col-md-4 d-flex justify-content-center">
                     <img
                         src={`/images/planets/${planetId}.jpg` || "https://placehold.co/150x150"}
-                        className="object-fit-fill"
+                        className="img-fluid rounded"
+                        style={{ maxWidth: "400px", objectFit: "cover", objectPosition: "top" }}
                         alt={planetDetails.name || ""}
                     />
                 </div>
-                <div className="col d-flex flex-column justify-content-center">
-                    <h2 className="text-primary text-center">{planetDetails.name}</h2>
+                <div className="col-md-8 d-flex flex-column justify-content-center">
+                    <h2 className="text-primary text-center">{planetDetails.name || "Loading..."}</h2>
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci, eum illo commodi eligendi quasi quod neque iusto pariatur perspiciatis sint? Quis repudiandae quos quo reiciendis dignissimos, ea eos totam laboriosam.</p>
                 </div>
             </section>
-            <hr style={{maxWidth: "80%", borderColor: "red", margin: "1rem auto", borderWidth:"4px"}} />
+            <hr style={{ maxWidth: "80%", borderColor: "red", margin: "1rem auto", borderWidth: "4px" }} />
             <section className="d-flex justify-content-around text-danger mb-5">
                 <div>
                     <p className="fw-bold">Terrain:</p>
-                    <p className="text-center">{planetDetails.terrain ? planetDetails.terrain.charAt(0).toUpperCase() + planetDetails.terrain.slice(1): ""}</p>
+                    <p className="text-center">{planetDetails.terrain ? planetDetails.terrain.charAt(0).toUpperCase() + planetDetails.terrain.slice(1) : ""}</p>
                 </div>
                 <div>
                     <p className="fw-bold">Population:</p>
@@ -51,7 +51,7 @@ export const Planet = () => {
                 </div>
                 <div>
                     <p className="fw-bold">Climate:</p>
-                    <p className="text-center">{planetDetails.climate ? planetDetails.climate.charAt(0).toUpperCase() + planetDetails.climate.slice(1): ""}</p>
+                    <p className="text-center">{planetDetails.climate ? planetDetails.climate.charAt(0).toUpperCase() + planetDetails.climate.slice(1) : ""}</p>
                 </div>
                 <div>
                     <p className="fw-bold">Surface Water:</p>
